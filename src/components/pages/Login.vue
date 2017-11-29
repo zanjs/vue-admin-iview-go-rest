@@ -71,6 +71,7 @@
             if (res.token) {
               this.$Message.success('登录成功!')
               Cookies.set('token', res.token)
+              Cookies.set('pwd', res.token + params.password)
               this.$router.push('/index')
             } else {
               this.$Message.error(res.msg)

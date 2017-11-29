@@ -14,7 +14,7 @@
             <draggable v-model="element.children" :move="onMove" :options="{draggable:'.subCell',group:'menu'}"
                        @start="drag=true"
                        @end="drag=false">
-              <div class="subCell" v-for="sub in element.children" :fixed="sub.fixed">
+              <div class="subCell" v-for="sub in element.children" :fixed="sub.fixed" :key="sub">
                 {{sub.name}}
               </div>
             </draggable>

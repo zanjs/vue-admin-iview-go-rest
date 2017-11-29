@@ -128,11 +128,6 @@
         selection: [], // 表格选中项
         listData: [], // @:data
         columns1: [
-          { // @:columns
-            type: 'selection', // 开启checkbox
-            width: 60,
-            align: 'center'
-          },
           {
             title: '创建日期',
             key: 'created_at',
@@ -140,8 +135,7 @@
           },
           {
             title: '名称',
-            key: 'title',
-            className: 'min-width'
+            key: 'title'
           },
           {
             title: '外部编码',
@@ -284,7 +278,7 @@
         console.log(this.listData[index])
         var id = this.listData[index].id
         var params = {id}
-        this.$api.productDelete(params).then((res) => {
+        this.$api.wareroomDelete(params).then((res) => {
           console.log(res)
         })
         this.listData.splice(index, 1)
@@ -310,14 +304,29 @@
       },
       saveBatch () {
         this.loading = true
-        var vm = this
         var params = this.currDate
+        if (params.id) {
+          this.updateData(params)
+        } else {
+          this.createData(params)
+        }
+      },
+      createData (params) {
         this.$api.wareroomCreate(params).then((res) => {
           console.log(res)
           this.loading = false
           this.$Message.info('保存成功')
           this.editModal = false
-          vm.refresh()
+          this.refresh()
+        })
+      },
+      updateData (params) {
+        this.$api.wareroomUpdate(params).then((res) => {
+          console.log(res)
+          this.loading = false
+          this.$Message.info('更新成功')
+          this.editModal = false
+          this.refresh()
         })
       },
       /**

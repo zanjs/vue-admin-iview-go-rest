@@ -3,7 +3,7 @@
       <div class="wrapper clearfix">
         <Avatar
           @click.native="passwordShow=true"
-          src="https://avatars1.githubusercontent.com/u/19198355?s=400&u=aa18d8f6d07dbd4f8f4dd966f3fbb2b3a1b3ee00&v=4"
+          :src=yimg
           style="cursor: pointer;" size="large">Lock
         </Avatar>
         <div class="input-wrapper" v-if="passwordShow">
@@ -22,10 +22,12 @@
 
 <script>
   import Cookies from 'js-cookie'
+  import Yimg from '../../../../static/svg/y.svg'
   export default {
     name: 'Unlock',
     data () {
       return {
+        yimg: Yimg,
         avatorLeft: '0px',
         inputLeft: '400px',
         password: '',
@@ -34,7 +36,7 @@
     },
     methods: {
       handleUnlock () {
-        if (Cookies.get('token') === this.password) {
+        if (Cookies.get('pwd') === Cookies.get('token') + this.password) {
           this.avatorLeft = '0px'
           this.inputLeft = '400px'
           this.password = ''
@@ -42,7 +44,7 @@
           console.log(this.$store.state.app.lockPage)
           this.$router.push(this.$store.state.app.lockPage)
         } else {
-          this.$Message.error('密码错误,请重新输入。如果忘了密码，清除浏览器缓存重新登录即可，这里没有做后端验证')
+          this.$Message.error('密码错误,请重新输入。如果忘了密码，清除浏览器缓存重新登录')
         }
       }
     },

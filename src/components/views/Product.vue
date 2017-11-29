@@ -128,11 +128,11 @@
         selection: [], // 表格选中项
         listData: [], // @:data
         columns1: [
-          { // @:columns
-            type: 'selection', // 开启checkbox
-            width: 60,
-            align: 'center'
-          },
+          // { // @:columns
+          //   type: 'selection', // 开启checkbox
+          //   width: 60,
+          //   align: 'center'
+          // },
           {
             title: '创建日期',
             key: 'created_at',
@@ -140,8 +140,7 @@
           },
           {
             title: '名称',
-            key: 'title',
-            className: 'min-width'
+            key: 'title'
           },
           {
             title: '外部编码',
@@ -280,20 +279,6 @@
         this.params.limit = limit
       },
       /**
-       * 表格对应操作方法
-       * @show 查看
-
-       */
-      show (index) {
-        this.currIndex = index
-        this.currDate = this.listData[index]
-        this.detailModal = true
-        this.$Modal.info({
-          title: '详情',
-          content: `姓名：${this.listData[index].who}<br>平台：${this.listData[index].type}<br>描述：${this.listData[index].desc}`
-        })
-      },
-      /**
        * 删除
        */
       remove (index) {
@@ -326,14 +311,31 @@
       },
       saveBatch () {
         this.loading = true
-        var vm = this
         var params = this.currDate
+        console.log('params')
+        console.log(params)
+        if (params.id) {
+          this.updateData(params)
+        } else {
+          this.createData(params)
+        }
+      },
+      createData (params) {
         this.$api.productCreate(params).then((res) => {
           console.log(res)
           this.loading = false
           this.$Message.info('保存成功')
           this.editModal = false
-          vm.refresh()
+          this.refresh()
+        })
+      },
+      updateData (params) {
+        this.$api.productUpdate(params).then((res) => {
+          console.log(res)
+          this.loading = false
+          this.$Message.info('更新成功')
+          this.editModal = false
+          this.refresh()
         })
       },
       /**

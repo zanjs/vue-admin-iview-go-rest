@@ -13,6 +13,7 @@ const List = () => import('@/components/views/List')
 const Product = () => import('@/components/views/Product')
 const Wareroom = () => import('@/components/views/Wareroom')
 const Record = () => import('@/components/views/Record')
+const RecordExcel = () => import('@/components/views/RecordExcel')
 const Filter = () => import('@/components/pages/Filter')
 const Lock = () => import('@/components/layout/base/Lock')
 
@@ -69,6 +70,14 @@ const routes = [
         path: '/record',
         name: '库存记载',
         component: Record,
+        meta: {
+          requiresAuth: true // 是否需要登录
+        }
+      },
+      {
+        path: '/record_excel',
+        name: '最新库存',
+        component: RecordExcel,
         meta: {
           requiresAuth: true // 是否需要登录
         }

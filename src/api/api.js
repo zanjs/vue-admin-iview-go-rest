@@ -24,6 +24,14 @@ const Login = data => {
 //   })
 // }
 
+const recordExcelList = params => {
+  return fetch({
+    url: `/v1/records/excel`,
+    method: 'get',
+    params
+  })
+}
+
 const recordList = params => {
   return fetch({
     url: `/v1/records?limit=${params.limit}&offset=${params.offset}`,
@@ -56,10 +64,26 @@ const productCreate = params => {
   })
 }
 
+const productUpdate = params => {
+  return fetch({
+    url: `/v1/products/${params.id}`,
+    method: 'PUT',
+    params: params
+  })
+}
+
 const wareroomCreate = params => {
   return fetch({
     url: `/v1/warerooms`,
     method: 'POST',
+    params: params
+  })
+}
+
+const wareroomUpdate = params => {
+  return fetch({
+    url: `/v1/warerooms/${params.id}`,
+    method: 'PUT',
     params: params
   })
 }
@@ -71,6 +95,15 @@ const productDelete = params => {
     params: ''
   })
 }
+
+const wareroomDelete = params => {
+  return fetch({
+    url: `/v1/warerooms/${params.id}`,
+    method: 'DELETE',
+    params: ''
+  })
+}
+
 const orderList = params => {
   return fetch({
     url: `/api/data/${params.category}/${params.limit}/${params.page}`,
@@ -121,11 +154,15 @@ const checkToken = params => {
 const apiList = {
   Login,
   recordList,
+  recordExcelList,
+  productUpdate,
   productList,
   wareroomList,
   productCreate,
   wareroomCreate,
+  wareroomUpdate,
   productDelete,
+  wareroomDelete,
   orderList,
   articleList,
   userList,

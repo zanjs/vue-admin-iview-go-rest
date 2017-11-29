@@ -24,6 +24,14 @@ const menu = [
     fixed: false
   },
   {
+    path: '/record_excel',
+    name: '最新库存',
+    icon: 'icon-shop_fill',
+    level: 1,
+    children: [],
+    fixed: false
+  },
+  {
     path: '/record',
     name: '库存记载',
     icon: 'icon-shop_fill',
