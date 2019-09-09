@@ -1,5 +1,7 @@
 # vue-admin-artiely
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/zanjs/vue-admin-iview-go-rest.svg)](https://greenkeeper.io/)
+
 > vue-admin by iview
 
 ## Build Setup
